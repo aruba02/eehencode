@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+
 <title>으에?</title>
+
 
 <style>
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
+
 
 body{
+
 margin:0;
+
 min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
 
-font-family:"Pretendard","Segoe UI",sans-serif;
+font-family:"Noto Sans KR","Segoe UI",sans-serif;
 
 background:
 radial-gradient(circle at top left,#38bdf8,transparent 30%),
@@ -26,53 +40,96 @@ radial-gradient(circle at bottom right,#a78bfa,transparent 30%),
 #020617;
 
 color:white;
+
 }
 
+
 .container{
+
 width:min(850px,92%);
+
 padding:35px;
 
 border-radius:32px;
 
 background:rgba(255,255,255,.12);
+
 backdrop-filter:blur(25px);
 
 box-shadow:0 30px 80px rgba(0,0,0,.45);
+
 }
+
 
 .header{
+
 text-align:center;
+
 margin-bottom:30px;
+
 }
+
 
 .logo{
+
 font-size:64px;
+
+font-weight:800;
+
+letter-spacing:-2px;
+
 }
+
+
 
 h1{
+
 margin:0;
+
+font-size:36px;
+
+font-weight:800;
+
+letter-spacing:-1px;
+
 }
+
+
 
 .grid{
+
 display:grid;
+
 grid-template-columns:1fr 1fr;
+
 gap:20px;
+
 }
 
+
+
 .panel{
+
 background:rgba(0,0,0,.25);
+
 padding:20px;
+
 border-radius:24px;
+
 }
+
+
 
 textarea{
 
 width:100%;
+
 height:220px;
 
 resize:none;
 
 border:none;
+
 outline:none;
 
 border-radius:18px;
@@ -80,20 +137,27 @@ border-radius:18px;
 padding:18px;
 
 background:#020617;
+
 color:white;
 
 font-size:16px;
+
+font-family:"Noto Sans KR","Segoe UI",sans-serif;
+
 }
+
 
 
 .buttons{
 
 display:flex;
+
 gap:12px;
 
 margin-top:25px;
 
 }
+
 
 
 button{
@@ -108,15 +172,33 @@ padding:16px;
 
 cursor:pointer;
 
-font-weight:bold;
+font-weight:700;
+
+font-family:"Noto Sans KR","Segoe UI",sans-serif;
 
 }
 
 
-.encode{background:#38bdf8}
-.decode{background:#a78bfa}
-.copy{background:#34d399}
-.clear{background:#fb7185}
+
+.encode{
+background:#38bdf8;
+}
+
+
+.decode{
+background:#a78bfa;
+}
+
+
+.copy{
+background:#34d399;
+}
+
+
+.clear{
+background:#fb7185;
+}
+
 
 
 .status{
@@ -127,7 +209,10 @@ text-align:center;
 
 margin-top:20px;
 
+color:#cbd5e1;
+
 }
+
 
 
 @media(max-width:700px){
@@ -135,6 +220,7 @@ margin-top:20px;
 .grid{
 grid-template-columns:1fr;
 }
+
 
 .buttons{
 flex-wrap:wrap;
@@ -147,6 +233,7 @@ flex-wrap:wrap;
 </head>
 
 
+
 <body>
 
 
@@ -155,9 +242,16 @@ flex-wrap:wrap;
 
 <div class="header">
 
-<div class="logo">으에?</div>
 
-<h1>으에?</h1>
+<div class="logo">
+으에?
+</div>
+
+
+<h1>
+으에?
+</h1>
+
 
 </div>
 
@@ -220,6 +314,8 @@ flex-wrap:wrap;
 
 
 
+
+
 <script>
 
 
@@ -227,20 +323,24 @@ const chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
 
-// 고정 + 중복 없는 코드
+
 const codes=[];
 
 
 function makeCodes(){
 
+
 for(let i=1; codes.length<chars.length; i++){
+
 
 let limit=1<<i;
 
 
 for(let j=0;j<limit && codes.length<chars.length;j++){
 
+
 let s="";
+
 
 for(let k=i-1;k>=0;k--){
 
@@ -248,11 +348,14 @@ s += (j&(1<<k)) ? "-" : ".";
 
 }
 
+
 codes.push(s);
 
+
 }
 
 }
+
 
 }
 
@@ -263,6 +366,7 @@ makeCodes();
 
 const enc={};
 const dec={};
+
 
 
 for(let i=0;i<chars.length;i++){
@@ -287,6 +391,7 @@ encodeURIComponent(str)
 }
 
 
+
 function fromBase64(str){
 
 return decodeURIComponent(
@@ -300,10 +405,11 @@ atob(str)
 
 
 
-
 function encodeText(){
 
+
 try{
+
 
 let b64=toBase64(input.value);
 
@@ -320,25 +426,28 @@ enc[c]
 .join(" ");
 
 
+
 setStatus("암호화 완료");
 
 
 }catch(e){
 
-console.log(e);
-
 output.value="암호화 실패";
 
 }
 
+
 }
+
 
 
 
 
 function decodeText(){
 
+
 try{
+
 
 let b64 =
 input.value
@@ -350,14 +459,7 @@ x.replace(/에/g,".")
 .replace(/으/g,"-")
 
 )
-.map(x=>{
-
-if(dec[x]===undefined)
-throw Error();
-
-return dec[x];
-
-})
+.map(x=>dec[x])
 .join("");
 
 
@@ -372,11 +474,10 @@ setStatus("복호화 완료");
 
 }catch(e){
 
-console.log(e);
-
 output.value="복호화 실패";
 
 }
+
 
 }
 
@@ -393,6 +494,7 @@ setStatus("복사 완료");
 
 
 
+
 function clearText(){
 
 input.value="";
@@ -402,12 +504,17 @@ output.value="";
 
 
 
+
+
 function setStatus(t){
 
 status.textContent=t;
 
+
 setTimeout(
-()=>status.textContent="",
+()=>{
+status.textContent="";
+},
 1500
 );
 
@@ -418,4 +525,5 @@ setTimeout(
 
 
 </body>
+
 </html>
